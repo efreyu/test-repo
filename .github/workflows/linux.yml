@@ -204,12 +204,24 @@ jobs:
           cd $LibrariesPath
           sudo mkdir -p $QT_PREFIX
           sudo cp -R qt-cache/. $QT_PREFIX/
+          
+      - name: VCPKG Build
+        run: |
+          cd $LibrariesPath
+          git clone https://github.com/microsoft/vcpkg.git vcpkg && cd vcpkg
+          echo ::set-env name=VcpkgPath::`pwd`
+          add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          apt-get update -y && apt-get install g++-7 -y 
+          ./bootstrap-vcpkg.sh
+          ./vcpkg integrate install 
+          ./vcpkg install harfbuzz pthread icu pcre2 glib
 
       - name: Build OneVPN
         run: |
           cd $REPO_NAME
           rm -rf build && mkdir build && cd build
           cmake --target install --config Release \
+          -DCMAKE_TOOLCHAIN_FILE=$VcpkgPath/scripts/buildsystems/vcpkg.cmake
           -DQt5Core_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Core \
           -DQt5Network_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Network \
           -DQt5Widgets_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Widgets ../ 
