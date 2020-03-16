@@ -60,7 +60,7 @@ jobs:
           sudo apt-get update
           sudo apt-get upgrade -y 
           sudo apt-get install -y --fix-missing \
-          build-essential clang cmake git wget autoconf xutils-dev libtool byacc bison \
+          build-essential clang git wget autoconf xutils-dev libtool byacc bison \
           flex gperf ibgstreamer-plugins-base0.10-dev libasound2-dev libatkmm-1.6-dev \
           libbz2-dev libcap-dev libcups2-dev libdrm-dev libegl1-mesa-dev libfontconfig1-dev \
           libfreetype6-dev libgcrypt11-dev libglu1-mesa-dev libgstreamer0.10-dev libicu-dev \
@@ -210,8 +210,8 @@ jobs:
           cd $REPO_NAME
           rm -rf build && mkdir build && cd build
           cmake --target install --config Release \
-          -DQt5Core_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Core \
-          -DQt5Network_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Network \
-          -DQt5Widgets_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Widgets ../ 
+          -DQt5Core_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Core \
+          -DQt5Network_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Network \
+          -DQt5Widgets_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Widgets ../ 
           make -j$(nproc)
 
