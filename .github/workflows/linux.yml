@@ -167,22 +167,25 @@ jobs:
           -qt-freetype \
           -qt-pcre \
           -qt-xcb \
-          -system-freetype \
-          -fontconfig \
+          -qt-freetype \
           -no-gtk \
           -skip wayland \
           -skip purchasing \
           -skip serialbus \
           -skip qtserialport \
-          -skip script \ 
-          -skip scxml \ 
-          -skip speech \ 
-          -skip qtwebengine \ 
-          -dbus-runtime \
+          -skip script \
+          -skip scxml \
+          -skip speech \
+          -skip qtwebengine \
           -openssl-linked \
           -I "$OPENSSL_PREFIX/include" OPENSSL_LIBS="$OPENSSL_PREFIX/lib/libssl.a $OPENSSL_PREFIX/lib/libcrypto.a -ldl -lpthread" \
           -nomake examples \
           -nomake tests
+           
+           make -j$(nproc)
+           sudo make install
+           cd ..
+           rm -rf qt_${QT}
 
       - name: Qt 5.12.5 install.
         run: |
