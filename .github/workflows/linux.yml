@@ -97,12 +97,23 @@ jobs:
           cd Libraries
           echo ::set-env name=LibrariesPath::`pwd`
           
+      - name: CMake.
+        run: |
+          cd $LibrariesPath
+          file=cmake-$CMAKE_VER-Linux-x86_64.sh
+          wget $GIT/Kitware/CMake/releases/download/v$CMAKE_VER/$file
+          sudo mkdir /opt/cmake
+          sudo sh $file --prefix=/opt/cmake --skip-license
+          sudo ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
+          cmake --version
+
       - name: OpenSSL cache.
         id: cache-openssl
         uses: actions/cache@v1
         with:
           path: ${{ env.LibrariesPath }}/openssl-cache
           key: ${{ runner.OS }}-${{ env.OPENSSL_VER }}-${{ env.CACHE_KEY }}
+
       - name: OpenSSL build.
         if: steps.cache-openssl.outputs.cache-hit != 'true'
         run: |
@@ -117,7 +128,7 @@ jobs:
           sudo make install_sw
           cd ..
           rm -rf $opensslDir
-          
+
       - name: OpenSSL install.
         run: |
           cd $LibrariesPath
@@ -142,6 +153,7 @@ jobs:
         with:
           path: ${{ env.LibrariesPath }}/qt-cache
           key: ${{ runner.OS }}-qt-${{ env.CACHE_KEY }}
+
       - name: Qt 5.12.5 build.
         if: steps.cache-qt.outputs.cache-hit != 'true'
         run: |
@@ -192,6 +204,7 @@ jobs:
           cd $LibrariesPath
           sudo mkdir -p $QT_PREFIX
           sudo cp -R qt-cache/. $QT_PREFIX/
+
       - name: Build OneVPN
         run: |
           cd $REPO_NAME
@@ -201,5 +214,4 @@ jobs:
           -DQt5Network_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Network \
           -DQt5Widgets_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Widgets ../ 
           make -j$(nproc)
-          sudo make install
 
