@@ -25,7 +25,7 @@ jobs:
       QT_PREFIX: "/usr/local/onevpn-app/Qt-5.12.5"
       OPENSSL_VER: "1_1_1"
       OPENSSL_PREFIX: "/usr/local/onevpn-app/openssl-1.1.1"
-      CMAKE_VER: "3.16.3"  
+      CMAKE_VER: "3.16.3"
 
     steps:
       - name: Get repository name.
@@ -184,10 +184,6 @@ jobs:
           -nomake examples \
           -nomake tests
 
-          make -j$(nproc)
-          sudo make install
-          cd ..
-          rm -rf qt_${QT}
       - name: Qt 5.12.5 install.
         run: |
           cd $LibrariesPath
