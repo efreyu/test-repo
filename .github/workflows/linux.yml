@@ -9,6 +9,8 @@ on:
     paths-ignore:
       - 'docs/**'
       - '*.md'
+      - 'win.yml'
+      - 'mac.yml'
 
 
 jobs:
