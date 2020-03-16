@@ -192,3 +192,14 @@ jobs:
           cd $LibrariesPath
           sudo mkdir -p $QT_PREFIX
           sudo cp -R qt-cache/. $QT_PREFIX/
+      - name: Build OneVPN
+        run: |
+          cd $REPO_NAME
+          rm -rf build && mkdir build && cd build
+          cmake --target install --config Release \
+          -DQt5Core_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Core \
+          -DQt5Network_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Network \
+          -DQt5Widgets_DIR=${QT_DIR_PREFIX}/lib/cmake/Qt5Widgets ../ 
+          make -j$(nproc)
+          sudo make install
+
