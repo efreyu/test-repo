@@ -137,13 +137,13 @@ jobs:
           rm -rf libxkbcommon
           
       - name: Qt 5.12.5 cache.
-        id: cache-qt
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.LibrariesPath }}/qt-cache
-          key: ${{ runner.OS }}-qt-${{ env.CACHE_KEY }}
+#         id: cache-qt
+#         uses: actions/cache@v1
+#         with:
+#           path: ${{ env.LibrariesPath }}/qt-cache
+#           key: ${{ runner.OS }}-qt-${{ env.CACHE_KEY }}
       - name: Qt 5.12.5 build.
-        if: steps.cache-qt.outputs.cache-hit != 'true'
+#         if: steps.cache-qt.outputs.cache-hit != 'true'
         run: |
           cd $LibrariesPath
 
