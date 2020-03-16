@@ -136,7 +136,7 @@ jobs:
           cd ..
           rm -rf libxkbcommon
           
-      - name: Qt 5.12.5 cache.
+#       - name: Qt 5.12.5 cache.
 #         id: cache-qt
 #         uses: actions/cache@v1
 #         with:
