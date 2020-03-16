@@ -235,9 +235,9 @@ jobs:
 #          -DQt5Network_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Network \
 #          -DQt5Widgets_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Widgets ../ 
 #          make -j$(nproc)
-      - name: Build OneVPN
-        run: |
-         cd $REPO_NAME && rm -rf qmake-build && mkdir qmake-build && cd qmake-build
-         $LibrariesPath/qt-cache/bin/qmake $REPO_NAME/src/OneVPN.pro
-         make -j$(nproc)
+#       - name: Build OneVPN
+#         run: |
+#         cd $REPO_NAME && rm -rf qmake-build && mkdir qmake-build && cd qmake-build
+#         $LibrariesPath/qt-cache/bin/qmake $REPO_NAME/src/OneVPN.pro
+#         make -j$(nproc)
 
