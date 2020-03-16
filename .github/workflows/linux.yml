@@ -58,6 +58,7 @@ jobs:
           cd $REPO_NAME
 
           sudo apt-get update
+          sudo apt-get upgrade -y 
           sudo apt-get install -y --fix-missing \
           build-essential clang cmake git wget autoconf xutils-dev libtool byacc bison \
           flex gperf ibgstreamer-plugins-base0.10-dev libasound2-dev libatkmm-1.6-dev \
