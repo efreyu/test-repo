@@ -188,7 +188,6 @@ jobs:
           sudo make install
           cd ..
           rm -rf qt_${QT}
-          
       - name: Qt 5.12.5 install.
         run: |
           cd $LibrariesPath
