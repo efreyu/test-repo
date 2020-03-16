@@ -223,14 +223,18 @@ jobs:
 #          ./vcpkg integrate install 
 #          ./vcpkg install harfbuzz pthread icu pcre2 glib
 
+#      - name: Build OneVPN
+#        run: |
+#          cd $REPO_NAME
+#          rm -rf build && mkdir build && cd build
+#          cmake --target install --config Release \
+#          -DCMAKE_TOOLCHAIN_FILE=$VcpkgPath/scripts/buildsystems/vcpkg.cmake \
+#          -DQt5Core_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Core \
+#          -DQt5Network_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Network \
+#          -DQt5Widgets_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Widgets ../ 
+#          make -j$(nproc)
       - name: Build OneVPN
-#         -DCMAKE_TOOLCHAIN_FILE=$VcpkgPath/scripts/buildsystems/vcpkg.cmake \
         run: |
-          cd $REPO_NAME
-          rm -rf build && mkdir build && cd build
-          cmake --target install --config Release \
-          -DQt5Core_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Core \
-          -DQt5Network_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Network \
-          -DQt5Widgets_DIR=$LibrariesPath/qt-cache/lib/cmake/Qt5Widgets ../ 
-          make -j$(nproc)
+         cd $REPO_NAME && rm -rf qmake-build && mkdir qmake-build && cd qmake-build
+         $LibrariesPath/qt-cache/bin/qmake $REPO_NAME/src/OneVPN.pro && make make -j$(nproc)
 
