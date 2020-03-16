@@ -210,8 +210,6 @@ jobs:
           cd $LibrariesPath
           git clone https://github.com/microsoft/vcpkg.git vcpkg && cd vcpkg
           echo ::set-env name=VcpkgPath::`pwd`
-          add-apt-repository ppa:ubuntu-toolchain-r/test -y
-          apt-get update -y && apt-get install g++-7 -y 
           ./bootstrap-vcpkg.sh
           ./vcpkg integrate install 
           ./vcpkg install harfbuzz pthread icu pcre2 glib
