@@ -9,6 +9,8 @@ on:
     paths-ignore:
       - 'docs/**'
       - '*.md'
+      - 'linux.yml'
+      - 'mac.yml'
 
 jobs:
 
@@ -119,7 +121,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.LibrariesPath }}/Qt-5.12.5
-          key: ${{ runner.OS }}-qt-${{ env.CACHE_KEY }}-${{ hashFiles('**/qtbase_5_12_5.diff') }}
+          key: ${{ runner.OS }}-qt-${{ env.CACHE_KEY }}
       - name: Configure Qt 5.12.5.
         if: steps.cache-qt.outputs.cache-hit != 'true'
         shell: cmd
@@ -132,9 +134,6 @@ jobs:
           git checkout v5.12.5
           git submodule update qtbase
           git submodule update qtimageformats
-          cd qtbase
-          git apply ../../patches/qtbase_%QT%.diff
-          cd ..
 
           SET SSL=%LibrariesPath%\openssl_1_1_1
           SET LIBS=libcrypto.lib Ws2_32.lib Gdi32.lib Advapi32.lib Crypt32.lib User32.lib
