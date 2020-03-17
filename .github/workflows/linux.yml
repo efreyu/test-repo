@@ -55,7 +55,12 @@ jobs:
       - name: First set up.
         shell: bash
         run: |
-
+          cd ..
+          mv $REPO_NAME temp
+          mkdir $REPO_NAME
+          mv temp $REPO_NAME/$REPO_NAME
+          cd $REPO_NAME
+          
           sudo apt-get update
           sudo apt-get upgrade -y 
           sudo apt-get install -y --fix-missing \
@@ -234,9 +239,11 @@ jobs:
         run: |
          cd $REPO_NAME
          ls
+         cd ..
          cd $REPO_NAME/src
          ls
+         cd ../../
          cd $REPO_NAME
          rm -rf qmake-build && mkdir qmake-build && cd qmake-build
-         $LibrariesPath/qt-cache/bin/qmake $REPO_NAME/src/OneVPN.pro
+         $LibrariesPath/qt-cache/bin/qmake ../$REPO_NAME/src/OneVPN.pro
          make -j$(nproc)
