@@ -247,3 +247,16 @@ jobs:
          rm -rf qmake-build && mkdir qmake-build && cd qmake-build
          $LibrariesPath/qt-cache/bin/qmake ../src/OneVPN.pro
          make -j$(nproc)
+         
+      - name: Move artifact.
+        #if: env.UPLOAD_ARTIFACT == 'true'
+        run: |
+          cd $REPO_NAME/qmake-build
+          mkdir artifact
+          mv * artifact/
+      - uses: actions/upload-artifact@master
+        #if: env.UPLOAD_ARTIFACT == 'true'
+        name: Upload artifact.
+        with:
+          name: OneVPN
+          path: ${{ env.REPO_NAME }}/qmake-build/artifact/
