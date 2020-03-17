@@ -168,3 +168,10 @@ jobs:
 
           cd ..
           rmdir /S /Q qt_%QT%
+          
+      - name: Build OneVPN
+        run: |
+          cd %REPO_NAME%
+          mkdir qmake-build
+          cd qmake-build
+          %LibrariesPath%\Qt-5.12.5\qmake ../src/OneVPN.pro
