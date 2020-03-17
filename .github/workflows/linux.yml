@@ -239,6 +239,9 @@ jobs:
         run: |
          cd $REPO_NAME
          ls
+         cd $REPO_NAME/src
+         ls
+         cd $REPO_NAME
          rm -rf qmake-build && mkdir qmake-build && cd qmake-build
          $LibrariesPath/qt-cache/bin/qmake $REPO_NAME/src/OneVPN.pro
          make -j$(nproc)
